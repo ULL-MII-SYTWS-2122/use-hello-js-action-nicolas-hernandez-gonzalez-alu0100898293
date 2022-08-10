@@ -11,7 +11,7 @@ jobs:
     name: Annotates pull request with metadata
     steps:
       - name: Annotate PR
-        uses: ULL-MII-SYTWS-2122/hello-js-action-alu0100898293@optional
+        uses: ULL-MII-SYTWS-2122/hello-js-action-nicolas-hernandez-gonzalez-alu0100898293@optional
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
