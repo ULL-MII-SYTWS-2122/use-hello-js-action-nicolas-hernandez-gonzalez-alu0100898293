@@ -1,23 +1,19 @@
-name: Using hello world
-on: [push]
+name: PR metadata annotation
+
+on: 
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
-  hello_world_job:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macOS-latest, windows-latest]
-    name: A job to say hello
+
+  annotate-pr:
+    runs-on: ubuntu-latest
+    name: Annotates pull request with metadata
     steps:
-      # To use this repository's private action, you must check out the repository
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Hello world action step
-        uses: ULL-MII-SYTWS-2122/hello-js-action-alu0100898293@v1
-        id: hello
+      - name: Annotate PR
+        uses: ULL-MII-SYTWS-2122/hello-js-action-alu0100898293@optional
         with:
-          who-to-greet: 'Sistemas y Tecnología Web: Servidor at ULL'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          pr_number: ${{ github.event.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
